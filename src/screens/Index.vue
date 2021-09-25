@@ -1,5 +1,5 @@
 <template>
-    <nb-container :style="{ backgroundColor: '#fff' }">
+    <nb-container :style="{ backgroundColor: '#f6fff8' }">
         <!-- Header -->
         <nb-header>
             <nb-left>
@@ -15,10 +15,10 @@
 
         <!-- Content -->
         <nb-content padder>
-            <welcome-tab v-if="tab1" />
-            <search-tab v-if="tab2" />
-            <cart-tab v-if="tab3" />
-            <account-tab v-if="tab4" />
+            <welcome-tab v-if="tab1" :navigation="navigation" />
+            <search-tab v-if="tab2" :navigation="navigation" />
+            <cart-tab v-if="tab3" :navigation="navigation" />
+            <account-tab v-if="tab4" :navigation="navigation" />
         </nb-content>
 
         <!-- Footer -->
@@ -52,6 +52,9 @@ import AccountTab from "./tabs/Account.vue";
 
 export default {
     name: "Index",
+    props: {
+        navigation: { type: Object }
+    },
     components: { WelcomeTab, SearchTab, CartTab, AccountTab },
     data() {
         return {
