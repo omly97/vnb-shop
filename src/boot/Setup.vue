@@ -15,12 +15,16 @@ import { Ionicons } from "@expo/vector-icons";
 import AppLoading from "expo-app-loading";
 import App from "../App.vue";
 
+// plugins
 import axios from "../plugins/axios";
+import store from "../store/index";
 
 // registering all native-base components to the global scope of the Vue
 Vue.use(VueNativeBase);
 
+// registering all plugins
 Vue.prototype.$axios = axios;
+Vue.prototype.$store = store;
 
 export default {
     components: { App, AppLoading },

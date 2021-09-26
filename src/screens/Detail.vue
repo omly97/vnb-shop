@@ -24,7 +24,7 @@
                     <nb-badge primary class="category">
                         <nb-text>{{ product.category }}</nb-text>
                     </nb-badge>
-                    <nb-text class="price">{{ `Prix: ${product.price * 100} fcfa` }}</nb-text>
+                    <nb-text class="price">{{ `Price: ${product.price * 100} fcfa` }}</nb-text>
                     <nb-text class="count">{{ `Stock: ${product.rating.count}` }}</nb-text>
                     <nb-text class="description">{{ product.description }}</nb-text>
                 </nb-card-item>
