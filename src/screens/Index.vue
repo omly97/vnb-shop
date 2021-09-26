@@ -1,5 +1,5 @@
 <template>
-    <nb-container :style="{ backgroundColor: '#f6fff8' }">
+    <nb-container :style="{ backgroundColor: '#fff' }">
         <!-- Header -->
         <nb-header>
             <nb-left>
