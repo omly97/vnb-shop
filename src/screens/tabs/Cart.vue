@@ -27,9 +27,9 @@
                         <image :source="{uri: data.item.image}" :style="{ height: '100%' }"  />
                     </nb-col>
                     <nb-col :size="3" :style="{ marginLeft: 20 }">
-                        <nb-text :style="styles.productTitle">{{ data.item.title.substring(0, 45) }}</nb-text>
-                        <nb-text :style="styles.productPrice">{{ `${data.item.price * 100} fcfa` }}</nb-text>
-                        <nb-text :style="styles.productPrice">{{ `Qte: ${data.item.cart_count}` }}</nb-text>
+                        <nb-text :style="styles.productText1">{{ data.item.title.substring(0, 45) }}</nb-text>
+                        <nb-text :style="styles.productText2">{{ `${data.item.price * 100} fcfa` }}</nb-text>
+                        <nb-text :style="styles.productText2">{{ `Qte: ${data.item.cart_count}` }}</nb-text>
                     </nb-col>
                 </nb-grid>
             </nb-view>
@@ -66,8 +66,8 @@
 
         <view class="checkout-container">
             <view>
-                <nb-text class="checkout-title">Total</nb-text>
-                <nb-text class="checkout-price">{{ `${totalPrice} F` }}</nb-text>
+                <nb-text :style="styles.checkoutText1">Total</nb-text>
+                <nb-text :style="styles.checkoutText2">{{ `${totalPrice} F` }}</nb-text>
             </view>
             <nb-button warning :onPress="checkOut">
                 <nb-text>Chech Out</nb-text>
@@ -86,46 +86,7 @@ export default {
     },
     data() {
         return {
-            styles: {
-                swipeViewLeft: {
-                    flex: 1,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: "100%",
-                },
-                swipeBtnLeft: {
-                    flex: 1,
-                    height: "100%",
-                    justifyContent: "flex-start",
-                    borderRadius: 0,
-                },
-                swipeBtnRight: {
-                    flex: 1,
-                    height: "100%",
-                    justifyContent: "flex-end",
-                    borderRadius: 0
-                },
-                swipeBtnIconContainer: {
-                    height: "100%",
-                    width: 75,
-                    justifyContent: "center",
-                    alignItems: "center"
-                },
-                swipeBtnIcon: {
-                    fontSize: 30
-                },
-                productTitle: {
-                    fontWeight: "bold",
-                    fontSize: 13,
-                    color: "#1B263B",
-                },
-                productPrice: {
-                    fontWeight: "bold",
-                    fontSize: 15,
-                    color: "#415A77",
-                    marginTop: 5,
-                }
-            }
+            styles: this.$theme.cart
         };
     },
     computed: {
@@ -138,8 +99,7 @@ export default {
     },
     methods: {
         increment(product) {
-            this.$store.dispatch('cart/incrementProductCartCount', product)
-                .then(() => product.cart_count++);
+            this.$store.dispatch('cart/incrementProductCartCount', product);
         },
         decrement(product) {
             this.$store.dispatch('cart/decrementProductCartCount', product);
@@ -160,19 +120,5 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     padding: 20;
-}
-
-.checkout-title {
-    font-weight: bold;
-    font-size: 15;
-    text-align: center;
-    color: #1B263B;
-}
-
-.checkout-price {
-    font-weight: bold;
-    font-size: 20;
-    text-align: center;
-    color: #415A77;
 }
 </style>

@@ -17,17 +17,17 @@
         <nb-content padder>
             <nb-card transparent>
                 <nb-card-item>
-                    <image :source="{ uri: product.image }" :style="stylesObj.cardItemImage" class="image" />
+                    <image :source="{ uri: product.image }" :style="styles.image" />
                 </nb-card-item>
 
-                <nb-card-item class="properties">
-                    <nb-text class="title">{{ product.title }}</nb-text>
-                    <nb-badge primary class="category">
+                <nb-card-item class="flex-column">
+                    <nb-text :style="styles.title">{{ product.title }}</nb-text>
+                    <nb-badge :style="styles.category">
                         <nb-text>{{ product.category }}</nb-text>
                     </nb-badge>
-                    <nb-text class="price">{{ `Price: ${product.price * 100} fcfa` }}</nb-text>
-                    <nb-text class="count">{{ `Stock: ${product.rating.count}` }}</nb-text>
-                    <nb-text class="description">{{ product.description }}</nb-text>
+                    <nb-text :style="styles.price">{{ `Price: ${product.price * 100} fcfa` }}</nb-text>
+                    <nb-text :style="styles.count">{{ `Stock: ${product.rating.count}` }}</nb-text>
+                    <nb-text :style="styles.description">{{ product.description }}</nb-text>
                 </nb-card-item>
 
                 <nb-badge v-if="isOnCart" success class="badge">
@@ -56,11 +56,7 @@ export default {
             product: {
                 rating: {}
             },
-            stylesObj: {
-                cardItemImage: {
-                    resizeMode: "cover"
-                }
-            }
+            styles: this.$theme.productLargeCard
         }
     },
     computed: {
@@ -100,48 +96,9 @@ export default {
 </script>
 
 <style scoped>
-.image {
-    height: 350;
-    width: 100%;
-}
-
-.properties {
+.flex-column {
     display: flex;
     flex-direction: column;
-}
-
-.title {
-    font-weight: bold;
-    font-size: 17;
-    text-align: left;
-    color: #191a1b;
-}
-
-.category {
-    margin-top: 5;
-    margin-bottom: 5;
-    background-color: #191a1b;
-    font-size: 1;
-}
-
-.price {
-    margin-top: 10;
-    font-weight: bold;
-    font-size: 25;
-    text-align: left;
-    color: #415A77;
-}
-
-.count {
-    font-size: 18;
-    font-weight: bold;
-    color: #1B263B;
-}
-
-.description {
-    margin-top: 10;
-    text-align: left;
-    color: #1B263B;
 }
 
 .badge {

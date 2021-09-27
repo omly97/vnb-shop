@@ -4,19 +4,8 @@
 
         <nb-grid>
             <nb-row v-for="row in rowsCount" :key="row">
-                <nb-col
-                    v-for="(product, i) in sliceProducts(row-1)" :key="i"
-                    button :onPress="() => showProduct(product.id)"
-                >
-                    <nb-card class="product-card">
-                        <nb-card-item>
-                            <image :source="{uri: product.image}" class="product-image" />
-                        </nb-card-item>
-                        <nb-card-item class="product-props">
-                            <nb-text class="product-title">{{ product.title.substring(0, 25) }} ...</nb-text>
-                            <nb-text class="product-price">{{ `${product.price * 100} fcfa` }}</nb-text>
-                        </nb-card-item>
-                    </nb-card>
+                <nb-col v-for="(product, i) in sliceProducts(row-1)" :key="i">
+                    <product-card :product="product" :navigation="navigation" />
                 </nb-col>
             </nb-row>
         </nb-grid>
@@ -24,13 +13,21 @@
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard.vue';
+
 export default {
     name: 'Search',
     props: {
         navigation: { type: Object }
     },
+    components: {
+        ProductCard
+    },
     data() {
         return {
+            styles: {
+                heading: this.$theme.heading,
+            },
             isLoading: false,
             products: [],
         }
@@ -60,40 +57,13 @@ export default {
         sliceProducts(n) {
             return this.products.slice(2*n, 2*n + 2)
         },
-        showProduct(id) {
-            this.navigation.navigate('Detail', { id: id })
-        }
     },
 }
 </script>
 
 <style scoped>
-.product-card {
-    height: 270;
-}
-
-.product-image {
-    width: 100%;
-    height: 150;
-    background-color: transparent;
-}
-
-.product-props {
+.flex-column {
     display: flex;
     flex-direction: column;
-}
-
-.product-title {
-    font-weight: bold;
-    font-size: 13;
-    text-align: center;
-    color: #1B263B;
-}
-
-.product-price {
-    font-weight: bold;
-    font-size: 15;
-    text-align: center;
-    color: #415A77;
 }
 </style>

@@ -4,22 +4,11 @@
 
         <nb-grid>
             <nb-row v-for="(section, i) in productSections" :key="i" class="flex-column">
-                <nb-text class="section-name">{{ section.sectionName }}</nb-text>
+                <nb-text :style="styles.heading.h6">{{ section.sectionName }}</nb-text>
                 <scroll-view horizontal>
                     <nb-grid>
-                        <nb-col
-                            v-for="product in section.products" :key="product.id"
-                            button :onPress="() => showProduct(product.id)"
-                        >
-                            <nb-card>
-                                <nb-card-item>
-                                    <image :source="{uri: product.image}" class="product-image" />
-                                </nb-card-item>
-                                <nb-card-item class="flex-column">
-                                    <nb-text class="product-title">{{ product.title.substring(0, 15) }}...</nb-text>
-                                    <nb-text class="product-price">{{ `${product.price * 100} F` }}</nb-text>
-                                </nb-card-item>
-                            </nb-card>
+                        <nb-col v-for="product in section.products" :key="product.id">
+                            <product-card :product="product" :navigation="navigation" />
                         </nb-col>
                     </nb-grid>
                 </scroll-view>
@@ -29,13 +18,21 @@
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard.vue';
+
 export default {
     name: 'Welcome',
     props: {
         navigation: { type: Object }
     },
+    components: {
+        ProductCard
+    },
     data() {
         return {
+            styles: {
+                heading: this.$theme.heading,
+            },
             isLoading: false,
             products: [],
         }
@@ -71,9 +68,6 @@ export default {
                     this.isLoading = false
                 })
         },
-        showProduct(id) {
-            this.navigation.navigate('Detail', { id: id })
-        }
     }
 }
 </script>
@@ -82,32 +76,5 @@ export default {
 .flex-column {
     display: flex;
     flex-direction: column;
-}
-
-.section-name {
-    font-weight: bold;
-    font-size: 16;
-    margin-top: 10;
-    margin-bottom: 10;
-}
-
-.product-image {
-    width: 100%;
-    height: 150;
-    background-color: transparent;
-}
-
-.product-title {
-    font-weight: bold;
-    font-size: 13;
-    text-align: center;
-    color: #1B263B;
-}
-
-.product-price {
-    font-weight: bold;
-    font-size: 15;
-    text-align: center;
-    color: #415A77;
 }
 </style>
