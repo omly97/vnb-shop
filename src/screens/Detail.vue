@@ -19,6 +19,7 @@
                 <nb-card-item>
                     <image :source="{ uri: product.image }" :style="stylesObj.cardItemImage" class="image" />
                 </nb-card-item>
+
                 <nb-card-item class="properties">
                     <nb-text class="title">{{ product.title }}</nb-text>
                     <nb-badge primary class="category">
@@ -28,12 +29,22 @@
                     <nb-text class="count">{{ `Stock: ${product.rating.count}` }}</nb-text>
                     <nb-text class="description">{{ product.description }}</nb-text>
                 </nb-card-item>
+
+                <nb-badge v-if="isOnCart" success class="badge">
+                    <nb-text>ADDED TO CART</nb-text>
+                </nb-badge>
+                <nb-button v-else warning block rounded iconLeft :onPress="addToCart">
+                    <nb-icon name="cart" />
+                    <nb-text>Add to cart</nb-text>
+                </nb-button>
             </nb-card>
         </nb-content>
     </nb-container>
 </template>
 
 <script>
+import { Toast } from "native-base";
+
 export default {
     name: 'Detail',
     props: {
@@ -52,6 +63,11 @@ export default {
             }
         }
     },
+    computed: {
+        isOnCart() {
+            return this.$store.getters['cart/isOnCart'](this.product)
+        }
+    },
     created() {
         this.fetchProduct();
     },
@@ -68,6 +84,16 @@ export default {
                 .finally(() => {
                     this.isLoading = false
                 })
+        },
+        addToCart() {
+            this.$store.dispatch('cart/addProduct', this.product).then(() => {
+                Toast.show({
+                    text: "Added to cart successfully",
+                    buttonText: "Ok",
+                    type: "success",
+                    position: "top"
+                });
+            });
         }
     },
 }
@@ -116,5 +142,11 @@ export default {
     margin-top: 10;
     text-align: left;
     color: #1B263B;
+}
+
+.badge {
+    width: 100%;
+    height: 45;
+    text-transform: uppercase;
 }
 </style>
