@@ -35,44 +35,47 @@ export default {
             state.products.forEach(product => {
                 total += product.cart_count * product.price * 100
             });
-            return total;
+            return Math.ceil(total);
         }
     },
 
     actions: {
         addProduct(context, product) {
             return new Promise((resolve, reject) => {
-                product['cart_count'] = 1;
+                product['cart_count'] = 1; // product quantity in command
                 context.state.products.push(product);
                 resolve();
             })
         },
 
-        updateProductCartCount(context, productId, newCartCount) {
+        updateProductCartCount(context, { productId, newCartCount }) {
             return new Promise((resolve, reject) => {
                 context.state.products.every(product => {
                     if (product.id == productId) {
-                        product.cart_count = newCartCount;
+                        product['cart_count'] = newCartCount;
                         return false;
                     }
                     return true;
                 });
+                context.state.products.push(); // refresh for updating vue
                 resolve();
             })
         },
 
         incrementProductCartCount({ dispatch }, product) {
-            let newCartCount = product.cart_count == product.rating.count
-                ? product.rating.count
-                : product.cart_count++
-            return dispatch('updateProductCartCount', product.id, newCartCount);
+            let newCartCount = product.cart_count == product.rating.count ? product.rating.count : product.cart_count + 1
+            return dispatch('updateProductCartCount', {
+                productId: product.id,
+                newCartCount: newCartCount
+            });
         },
 
         decrementProductCartCount({ dispatch }, product) {
-            let newCartCount = product.cart_count == 0
-                ? 0
-                : product.cart_count--
-            return dispatch('updateProductCartCount', product.id, newCartCount);
+            let newCartCount = product.cart_count == 0 ? 0 : product.cart_count - 1
+            return dispatch('updateProductCartCount', {
+                productId: product.id,
+                newCartCount: newCartCount
+            });
         },
 
         removeProduct(context, product) {

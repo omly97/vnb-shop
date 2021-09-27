@@ -4,7 +4,8 @@
 
         <swipe-list-view
             :data="products"
-            disableRightSwipe
+            :leftOpenValue="75"
+            :stopLeftSwipe="100"
             :rightOpenValue="-75"
             :stopRightSwipe="-100"
             :keyExtractor="item => item.id.toString()"
@@ -26,8 +27,9 @@
                         <image :source="{uri: data.item.image}" :style="{ height: '100%' }"  />
                     </nb-col>
                     <nb-col :size="3" :style="{ marginLeft: 20 }">
-                        <nb-text :style="styles.productTitle">{{ data.item.title }}</nb-text>
+                        <nb-text :style="styles.productTitle">{{ data.item.title.substring(0, 45) }}</nb-text>
                         <nb-text :style="styles.productPrice">{{ `${data.item.price * 100} fcfa` }}</nb-text>
+                        <nb-text :style="styles.productPrice">{{ `Qte: ${data.item.cart_count}` }}</nb-text>
                     </nb-col>
                 </nb-grid>
             </nb-view>
@@ -42,7 +44,19 @@
                     height: 120
                 }"
             >
-                <nb-button danger :onPress="() => removeProduct(data.item)" :style="styles.swipeBtnRight">
+                <view :style="styles.swipeViewLeft">
+                    <nb-button transparent :onPress="() => increment(data.item)" :style="styles.swipeBtnLeft">
+                        <view :style="styles.swipeBtnIconContainer">
+                            <nb-icon type="FontAwesome" name="plus" />
+                        </view>
+                    </nb-button>
+                    <nb-button transparent :onPress="() => decrement(data.item)" :style="styles.swipeBtnLeft">
+                        <view :style="styles.swipeBtnIconContainer">
+                            <nb-icon type="FontAwesome" name="minus" />
+                        </view>
+                    </nb-button>
+                </view>
+                <nb-button danger :onPress="() => remove(data.item)" :style="styles.swipeBtnRight">
                     <view :style="styles.swipeBtnIconContainer">
                         <nb-icon name="trash" :style="styles.swipeBtnIcon" />
                     </view>
@@ -73,6 +87,18 @@ export default {
     data() {
         return {
             styles: {
+                swipeViewLeft: {
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: "100%",
+                },
+                swipeBtnLeft: {
+                    flex: 1,
+                    height: "100%",
+                    justifyContent: "flex-start",
+                    borderRadius: 0,
+                },
                 swipeBtnRight: {
                     flex: 1,
                     height: "100%",
@@ -111,7 +137,14 @@ export default {
         },
     },
     methods: {
-        removeProduct(product) {
+        increment(product) {
+            this.$store.dispatch('cart/incrementProductCartCount', product)
+                .then(() => product.cart_count++);
+        },
+        decrement(product) {
+            this.$store.dispatch('cart/decrementProductCartCount', product);
+        },
+        remove(product) {
             this.$store.dispatch('cart/removeProduct', product);
         },
         checkOut() {
