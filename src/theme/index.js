@@ -5,6 +5,12 @@ const COLORS =  {
 };
 
 const theme = {
+    colors: {
+        blueDark: COLORS.blueDark,
+        blueLight: COLORS.blueLight,
+        black: COLORS.black,
+    },
+
     heading: {
         h6: {
             fontWeight: 'bold',
@@ -13,65 +19,6 @@ const theme = {
             marginBottom: 10,
             color: COLORS.blueDark,
         },
-    },
-
-    productSmallCard: {
-        container: {
-            height: 280,
-            width: 150,
-            borderBottomWidth: 5,
-        },
-        image: {
-            width: '100%',
-            height: 160,
-        },
-        title: {
-            fontWeight: 'bold',
-            fontSize: 13,
-            textAlign: 'center',
-            color: COLORS.blueDark,
-        },
-        price: {
-            fontWeight: 'bold',
-            fontSize: 15,
-            textAlign: 'center',
-            color: COLORS.blueLight,
-        }
-    },
-
-    productLargeCard: {
-        image: {
-            width: '100%',
-            height: 350,
-            resizeMode: "cover",
-        },
-        title: {
-            fontWeight: 'bold',
-            fontSize: 17,
-            textAlign: 'center',
-            color: COLORS.black,
-        },
-        category: {
-            marginTop: 5,
-            backgroundColor: COLORS.black,
-            fontSize: 1,
-        },
-        price: {
-            fontWeight: 'bold',
-            fontSize: 25,
-            textAlign: 'left',
-            color: COLORS.blueLight,
-        },
-        count: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: COLORS.blueDark,
-        },
-        description: {
-            //marginTop: 10,
-            textAlign: 'left',
-            color: COLORS.blueDark,
-        }
     },
 
     cart: {

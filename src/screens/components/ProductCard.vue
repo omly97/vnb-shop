@@ -1,11 +1,11 @@
 <template>
-    <nb-card :style="styles.product.container">
+    <nb-card :style="styleObj.container">
         <nb-card-item button :onPress="() => showProduct(product.id)" class="flex-column">
-            <image :source="{uri: product.image}" :style="styles.product.image" />
+            <image :source="{uri: product.image}" :style="styleObj.image" />
 
-            <view class="flex-column detail">
-                <nb-text :style="styles.product.title">{{ product.title.substring(0, 25) }}...</nb-text>
-                <nb-text :style="styles.product.price">{{ `${product.price * 100} F` }}</nb-text>
+            <view class="flex-column mt-20">
+                <nb-text :style="styleObj.title">{{ product.title.substring(0, 25) }}...</nb-text>
+                <nb-text :style="styleObj.price">{{ `${product.price * 100} F` }}</nb-text>
             </view>
         </nb-card-item>
     </nb-card>
@@ -25,8 +25,28 @@ export default {
     },
     data() {
         return {
-            styles: {
-                product: this.$theme.productSmallCard,
+            styleObj: {
+                container: {
+                    height: 280,
+                    width: 150,
+                    borderBottomWidth: 5,
+                },
+                image: {
+                    width: '100%',
+                    height: 160,
+                },
+                title: {
+                    fontWeight: 'bold',
+                    fontSize: 13,
+                    textAlign: 'center',
+                    color: this.$theme.blueDark,
+                },
+                price: {
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                    textAlign: 'center',
+                    color: this.$theme.blueDark,
+                }
             },
         }
     },
@@ -44,7 +64,7 @@ export default {
     flex-direction: column;
 }
 
-.detail {
+.mt-20 {
     margin-top: 20;
 }
 </style>

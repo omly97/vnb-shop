@@ -56,7 +56,40 @@ export default {
             product: {
                 rating: {}
             },
-            styles: this.$theme.productLargeCard
+            styleObj: {
+                image: {
+                    width: '100%',
+                    height: 350,
+                    resizeMode: "cover",
+                },
+                title: {
+                    fontWeight: 'bold',
+                    fontSize: 17,
+                    textAlign: 'center',
+                    color: this.$theme.colorsblack,
+                },
+                category: {
+                    marginTop: 5,
+                    backgroundColor: this.$theme.colorsblack,
+                    fontSize: 1,
+                },
+                price: {
+                    fontWeight: 'bold',
+                    fontSize: 25,
+                    textAlign: 'left',
+                    color: this.$theme.colorsblueLight,
+                },
+                count: {
+                    fontSize: 18,
+                    fontWeight: 'bold',
+                    color: this.$theme.colorsblueDark,
+                },
+                description: {
+                    marginTop: 10,
+                    textAlign: 'left',
+                    color: this.$theme.colorsblueDark,
+                }
+            }
         }
     },
     computed: {
