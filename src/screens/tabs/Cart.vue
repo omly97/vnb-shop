@@ -27,9 +27,9 @@
                         <image :source="{uri: data.item.image}" :style="{ height: '100%' }"  />
                     </nb-col>
                     <nb-col :size="3" :style="{ marginLeft: 20 }">
-                        <nb-text :style="styles.productText1">{{ data.item.title.substring(0, 45) }}</nb-text>
-                        <nb-text :style="styles.productText2">{{ `${data.item.price * 100} fcfa` }}</nb-text>
-                        <nb-text :style="styles.productText2">{{ `Qte: ${data.item.cart_count}` }}</nb-text>
+                        <nb-text :style="styleObj.productText1">{{ data.item.title.substring(0, 45) }}</nb-text>
+                        <nb-text :style="styleObj.productText2">{{ `${data.item.price * 100} fcfa` }}</nb-text>
+                        <nb-text :style="styleObj.productText2">{{ `Qte: ${data.item.cart_count}` }}</nb-text>
                     </nb-col>
                 </nb-grid>
             </nb-view>
@@ -44,21 +44,21 @@
                     height: 120
                 }"
             >
-                <view :style="styles.swipeViewLeft">
-                    <nb-button transparent :onPress="() => increment(data.item)" :style="styles.swipeBtnLeft">
-                        <view :style="styles.swipeBtnIconContainer">
+                <view :style="styleObj.swipeViewLeft">
+                    <nb-button transparent :onPress="() => increment(data.item)" :style="styleObj.swipeBtnLeft">
+                        <view :style="styleObj.swipeBtnIconContainer">
                             <nb-icon type="FontAwesome" name="plus" />
                         </view>
                     </nb-button>
-                    <nb-button transparent :onPress="() => decrement(data.item)" :style="styles.swipeBtnLeft">
-                        <view :style="styles.swipeBtnIconContainer">
+                    <nb-button transparent :onPress="() => decrement(data.item)" :style="styleObj.swipeBtnLeft">
+                        <view :style="styleObj.swipeBtnIconContainer">
                             <nb-icon type="FontAwesome" name="minus" />
                         </view>
                     </nb-button>
                 </view>
-                <nb-button danger :onPress="() => remove(data.item)" :style="styles.swipeBtnRight">
-                    <view :style="styles.swipeBtnIconContainer">
-                        <nb-icon name="trash" :style="styles.swipeBtnIcon" />
+                <nb-button danger :onPress="() => remove(data.item)" :style="styleObj.swipeBtnRight">
+                    <view :style="styleObj.swipeBtnIconContainer">
+                        <nb-icon name="trash" :style="styleObj.swipeBtnIcon" />
                     </view>
                 </nb-button>
             </view>
@@ -66,11 +66,11 @@
 
         <view class="checkout-container">
             <view>
-                <nb-text :style="styles.checkoutText1">Total</nb-text>
-                <nb-text :style="styles.checkoutText2">{{ `${totalPrice} F` }}</nb-text>
+                <nb-text class="checkout-text1">Total</nb-text>
+                <nb-text class="checkout-text2">{{ `${totalPrice} F` }}</nb-text>
             </view>
             <nb-button warning :onPress="checkOut">
-                <nb-text>Chech Out</nb-text>
+                <nb-text>Check Out</nb-text>
             </nb-button>
         </view>
     </view>
@@ -86,7 +86,46 @@ export default {
     },
     data() {
         return {
-            styles: this.$theme.cart
+            styleObj: {
+                swipeViewLeft: {
+                    flex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: "100%",
+                },
+                swipeBtnLeft: {
+                    flex: 1,
+                    height: "100%",
+                    justifyContent: "flex-start",
+                    borderRadius: 0,
+                },
+                swipeBtnRight: {
+                    flex: 1,
+                    height: "100%",
+                    justifyContent: "flex-end",
+                    borderRadius: 0
+                },
+                swipeBtnIconContainer: {
+                    height: "100%",
+                    width: 75,
+                    justifyContent: "center",
+                    alignItems: "center"
+                },
+                swipeBtnIcon: {
+                    fontSize: 30
+                },
+                productText1: {
+                    fontWeight: 'bold',
+                    fontSize: 13,
+                    color: "#1B263B",
+                },
+                productText2: {
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                    color: "#415A77",
+                    marginTop: 2,
+                }
+            }
         };
     },
     computed: {
@@ -120,5 +159,19 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     padding: 20;
+}
+
+.checkout-text1 {
+    font-weight: bold;
+    font-size: 15;
+    text-align: center;
+    color: #1B263B;
+}
+
+.checkout-text2 {
+    font-weight: bold;
+    font-size: 20;
+    text-align: center;
+    color: #415A77;
 }
 </style>

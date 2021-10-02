@@ -1,11 +1,11 @@
 <template>
-    <nb-card :style="styleObj.container">
+    <nb-card class="container">
         <nb-card-item button :onPress="() => showProduct(product.id)" class="flex-column">
-            <image :source="{uri: product.image}" :style="styleObj.image" />
+            <image :source="{uri: product.image}" class="image" />
 
             <view class="flex-column mt-20">
-                <nb-text :style="styleObj.title">{{ product.title.substring(0, 25) }}...</nb-text>
-                <nb-text :style="styleObj.price">{{ `${product.price * 100} F` }}</nb-text>
+                <nb-text class="title">{{ product.title.substring(0, 25) }}...</nb-text>
+                <nb-text class="price">{{ `${product.price * 100} F` }}</nb-text>
             </view>
         </nb-card-item>
     </nb-card>
@@ -21,33 +21,6 @@ export default {
         },
         navigation: {
             type: Object
-        }
-    },
-    data() {
-        return {
-            styleObj: {
-                container: {
-                    height: 280,
-                    width: 150,
-                    borderBottomWidth: 5,
-                },
-                image: {
-                    width: '100%',
-                    height: 160,
-                },
-                title: {
-                    fontWeight: 'bold',
-                    fontSize: 13,
-                    textAlign: 'center',
-                    color: this.$theme.blueDark,
-                },
-                price: {
-                    fontWeight: 'bold',
-                    fontSize: 15,
-                    textAlign: 'center',
-                    color: this.$theme.blueDark,
-                }
-            },
         }
     },
     methods: {
@@ -66,5 +39,31 @@ export default {
 
 .mt-20 {
     margin-top: 20;
+}
+
+.container {
+    height: 280;
+    width: 150;
+    border-bottom-width: 5;
+}
+
+.image {
+    width: 100%;
+    height: 160;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 13;
+    text-align: center;
+    color: #1B263B;
+}
+
+.price {
+    margin-top: 5;
+    font-weight: bold;
+    font-size: 15;
+    text-align: center;
+    color: #415A77;
 }
 </style>

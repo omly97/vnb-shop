@@ -17,17 +17,17 @@
         <nb-content padder>
             <nb-card transparent>
                 <nb-card-item>
-                    <image :source="{ uri: product.image }" :style="styles.image" />
+                    <image :source="{ uri: product.image }" class="image" />
                 </nb-card-item>
 
                 <nb-card-item class="flex-column">
-                    <nb-text :style="styles.title">{{ product.title }}</nb-text>
-                    <nb-badge :style="styles.category">
+                    <nb-text class="title">{{ product.title }}</nb-text>
+                    <nb-badge class="category">
                         <nb-text>{{ product.category }}</nb-text>
                     </nb-badge>
-                    <nb-text :style="styles.price">{{ `Price: ${product.price * 100} fcfa` }}</nb-text>
-                    <nb-text :style="styles.count">{{ `Stock: ${product.rating.count}` }}</nb-text>
-                    <nb-text :style="styles.description">{{ product.description }}</nb-text>
+                    <nb-text class="price">{{ `Price: ${product.price * 100} fcfa` }}</nb-text>
+                    <nb-text class="count">{{ `Stock: ${product.rating.count}` }}</nb-text>
+                    <nb-text class="description">{{ product.description }}</nb-text>
                 </nb-card-item>
 
                 <nb-badge v-if="isOnCart" success class="badge">
@@ -55,40 +55,6 @@ export default {
             isLoading: false,
             product: {
                 rating: {}
-            },
-            styleObj: {
-                image: {
-                    width: '100%',
-                    height: 350,
-                    resizeMode: "cover",
-                },
-                title: {
-                    fontWeight: 'bold',
-                    fontSize: 17,
-                    textAlign: 'center',
-                    color: this.$theme.colorsblack,
-                },
-                category: {
-                    marginTop: 5,
-                    backgroundColor: this.$theme.colorsblack,
-                    fontSize: 1,
-                },
-                price: {
-                    fontWeight: 'bold',
-                    fontSize: 25,
-                    textAlign: 'left',
-                    color: this.$theme.colorsblueLight,
-                },
-                count: {
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    color: this.$theme.colorsblueDark,
-                },
-                description: {
-                    marginTop: 10,
-                    textAlign: 'left',
-                    color: this.$theme.colorsblueDark,
-                }
             }
         }
     },
@@ -132,6 +98,44 @@ export default {
 .flex-column {
     display: flex;
     flex-direction: column;
+}
+
+.image {
+    width: 100%;
+    height: 350;
+    /*resize-mode: "cover";*/
+}
+
+.title {
+    font-weight: bold;
+    font-size: 17;
+    text-align: center;
+    color: #191a1b;
+}
+
+.category {
+    margin-top: 5;
+    background-color: #191a1b;
+    font-size: 1;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 25;
+    text-align: left;
+    color: #415A77;
+}
+
+.count {
+    font-size: 18;
+    font-weight: bold;
+    color: #1B263B;
+}
+
+.description {
+    margin-top: 10;
+    text-align: left;
+    color: #1B263B;
 }
 
 .badge {
