@@ -64,7 +64,7 @@
             </view>
         </swipe-list-view>
 
-        <view class="checkout-container">
+        <view v-if="products.length" class="checkout-container">
             <view>
                 <nb-text class="checkout-text1">Total</nb-text>
                 <nb-text class="checkout-text2">{{ `${totalPrice} F` }}</nb-text>
@@ -72,6 +72,11 @@
             <nb-button warning :onPress="checkOut">
                 <nb-text>Check Out</nb-text>
             </nb-button>
+        </view>
+
+        <view v-else class="empty-container">
+            <nb-icon name="cart" class="empty-icon" />
+            <nb-text class="empty-text">Empty Cart</nb-text>
         </view>
     </view>
 </template>
@@ -132,6 +137,9 @@ export default {
         products() {
             return this.$store.getters['cart/products'];
         },
+        cartCount() {
+            return this.$store.getters['cart/cartCount'];
+        },
         totalPrice() {
             return this.$store.getters['cart/totalPrice'];
         },
@@ -173,5 +181,24 @@ export default {
     font-size: 20;
     text-align: center;
     color: #415A77;
+}
+
+.empty-container {
+    margin-top: 25%;
+    align-self: auto;
+    height: 100%;
+}
+
+.empty-icon {
+    font-size: 200;
+    color: #d3d4d4;
+    text-align: center;
+}
+
+.empty-text {
+    font-size: 30;
+    font-weight: bold;
+    text-align: center;
+    color: #d3d4d4;
 }
 </style>

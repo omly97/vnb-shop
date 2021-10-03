@@ -15,7 +15,8 @@
 
         <!-- Content -->
         <nb-content padder>
-            <nb-card transparent>
+            <ProductDetailSkeleton v-if="isLoading" />
+            <nb-card v-else transparent>
                 <nb-card-item>
                     <image :source="{ uri: product.image }" class="image" />
                 </nb-card-item>
@@ -43,12 +44,16 @@
 </template>
 
 <script>
+import ProductDetailSkeleton from "./components/skeleton/ProductDetail.vue";
 import { Toast } from "native-base";
 
 export default {
     name: 'Detail',
     props: {
         navigation: { type: Object }
+    },
+    components: {
+        ProductDetailSkeleton
     },
     data() {
         return {

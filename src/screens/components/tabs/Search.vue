@@ -1,18 +1,22 @@
 <template>
     <view>
-        <nb-h1>Search</nb-h1>
+        <ProductListSkeleton v-if="isLoading" />
 
-        <nb-grid>
-            <nb-row v-for="row in rowsCount" :key="row">
-                <nb-col v-for="(product, i) in sliceProducts(row-1)" :key="i">
-                    <product-card :product="product" :navigation="navigation" />
-                </nb-col>
-            </nb-row>
-        </nb-grid>
+        <view v-else>
+            <nb-h1>Search</nb-h1>
+            <nb-grid>
+                <nb-row v-for="row in rowsCount" :key="row">
+                    <nb-col v-for="(product, i) in sliceProducts(row-1)" :key="i">
+                        <product-card :product="product" :navigation="navigation" />
+                    </nb-col>
+                </nb-row>
+            </nb-grid>
+        </view>
     </view>
 </template>
 
 <script>
+import ProductListSkeleton from '../skeleton/ProductList.vue';
 import ProductCard from '../ProductCard.vue';
 
 export default {
@@ -21,7 +25,7 @@ export default {
         navigation: { type: Object }
     },
     components: {
-        ProductCard
+        ProductListSkeleton, ProductCard
     },
     data() {
         return {

@@ -1,23 +1,27 @@
 <template>
     <view>
-        <nb-h1>Welcome</nb-h1>
+        <ProductListSkeleton v-if="isLoading" />
 
-        <nb-grid>
-            <nb-row v-for="(section, i) in productSections" :key="i" class="flex-column">
-                <nb-text>{{ section.sectionName }}</nb-text>
-                <scroll-view horizontal>
-                    <nb-grid>
-                        <nb-col v-for="product in section.products" :key="product.id">
-                            <product-card :product="product" :navigation="navigation" />
-                        </nb-col>
-                    </nb-grid>
-                </scroll-view>
-            </nb-row>
-        </nb-grid>
+        <view v-else>
+            <nb-h1>Welcome</nb-h1>
+            <nb-grid>
+                <nb-row v-for="(section, i) in productSections" :key="i" class="flex-column">
+                    <nb-text>{{ section.sectionName }}</nb-text>
+                    <scroll-view horizontal>
+                        <nb-grid>
+                            <nb-col v-for="product in section.products" :key="product.id">
+                                <product-card :product="product" :navigation="navigation" />
+                            </nb-col>
+                        </nb-grid>
+                    </scroll-view>
+                </nb-row>
+            </nb-grid>
+        </view>
     </view>
 </template>
 
 <script>
+import ProductListSkeleton from '../skeleton/ProductList.vue';
 import ProductCard from '../ProductCard.vue';
 
 export default {
@@ -26,7 +30,7 @@ export default {
         navigation: { type: Object }
     },
     components: {
-        ProductCard
+        ProductListSkeleton, ProductCard
     },
     data() {
         return {
