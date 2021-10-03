@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import WelcomeTab from "./tabs/Welcome.vue";
-import SearchTab from "./tabs/Search.vue";
-import CartTab from "./tabs/Cart.vue";
-import AccountTab from "./tabs/Account.vue";
+import WelcomeTab from "./components/tabs/Welcome.vue";
+import SearchTab from "./components/tabs/Search.vue";
+import CartTab from "./components/tabs/Cart.vue";
+import AccountTab from "./components/tabs/Account.vue";
 
 export default {
     name: "Index",

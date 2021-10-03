@@ -4,7 +4,7 @@
 
         <nb-grid>
             <nb-row v-for="(section, i) in productSections" :key="i" class="flex-column">
-                <nb-text :style="styles.heading.h6">{{ section.sectionName }}</nb-text>
+                <nb-text>{{ section.sectionName }}</nb-text>
                 <scroll-view horizontal>
                     <nb-grid>
                         <nb-col v-for="product in section.products" :key="product.id">
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ProductCard from '../components/ProductCard.vue';
+import ProductCard from '../ProductCard.vue';
 
 export default {
     name: 'Welcome',
@@ -30,9 +30,6 @@ export default {
     },
     data() {
         return {
-            styles: {
-                heading: this.$theme.heading,
-            },
             isLoading: false,
             products: [],
         }

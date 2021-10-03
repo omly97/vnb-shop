@@ -108,20 +108,22 @@ export default {
 
 .title {
     font-weight: bold;
-    font-size: 17;
+    font-size: 18;
     text-align: center;
     color: #191a1b;
 }
 
 .category {
-    margin-top: 5;
+    margin-top: 10;
     background-color: #191a1b;
     font-size: 1;
+    align-self: center;
 }
 
 .price {
+    margin-top: 10;
     font-weight: bold;
-    font-size: 25;
+    font-size: 23;
     text-align: left;
     color: #415A77;
 }

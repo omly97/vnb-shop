@@ -38,7 +38,7 @@ export default {
 }
 
 .mt-20 {
-    margin-top: 20;
+    margin-top: 15;
 }
 
 .container {
@@ -60,7 +60,6 @@ export default {
 }
 
 .price {
-    margin-top: 5;
     font-weight: bold;
     font-size: 15;
     text-align: center;

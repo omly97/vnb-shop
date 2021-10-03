@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ProductCard from '../components/ProductCard.vue';
+import ProductCard from '../ProductCard.vue';
 
 export default {
     name: 'Search',
@@ -25,9 +25,6 @@ export default {
     },
     data() {
         return {
-            styles: {
-                heading: this.$theme.heading,
-            },
             isLoading: false,
             products: [],
         }
